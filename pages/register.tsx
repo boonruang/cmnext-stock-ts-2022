@@ -2,7 +2,6 @@ import React from 'react'
 import { makeStyles } from '@mui/material/styles'
 
 import { Formik, Form, Field, FormikProps } from 'formik'
-// import { Button, Card, CardContent, CardMedia , Box} from '@mui/material'
 import Card from '@mui/material/Card'
 import CardActionArea from '@mui/material/CardActionArea'
 import CardActions from '@mui/material/CardActions'
@@ -15,7 +14,7 @@ import { Box } from '@mui/material'
 
 interface Props {}
 
-const Register = ({}: Props) => {
+export default function Register({}: Props) {
   const showForm = ({
     values,
     setFieldValue,
@@ -54,7 +53,7 @@ const Register = ({}: Props) => {
           fullWidth
           size="small"
           color="primary"
-          onClick={() => Router.push('/')}
+          onClick={() => Router.push('/login')}
         >
           Cancel
         </Button>
@@ -103,5 +102,3 @@ const Register = ({}: Props) => {
     </React.Fragment>
   )
 }
-
-export default Register
