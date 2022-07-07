@@ -26,3 +26,9 @@ yarn add @mui/icons-material
 yarn add formik formik-material-ui chart.js react-chartjs-2 react-moment moment react-number-format
 yarn add @reduxjs/toolkit react-redux axios cookie @react-hook/debounce @mui/x-data-grid react-iframe
 yarn add @types/cookie --dev
+
+REST client
+SQLite viewer
+
+#
+yarn add @reduxjs/toolkit
