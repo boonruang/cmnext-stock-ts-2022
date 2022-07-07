@@ -32,3 +32,4 @@ SQLite viewer
 
 #
 yarn add @reduxjs/toolkit
+yarn add react-redux
