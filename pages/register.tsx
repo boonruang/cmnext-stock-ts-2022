@@ -11,10 +11,14 @@ import Button from '@mui/material/Button'
 import Router, { useRouter } from 'next/router'
 import { TextField } from 'formik-material-ui'
 import { Box } from '@mui/material'
+import { useAppDispatch } from '@/store/store'
+import { signUp } from '@/store/slices/userSlice'
 
 interface Props {}
 
 export default function Register({}: Props) {
+  const dispatch = useAppDispatch()
+
   const showForm = ({
     values,
     setFieldValue,
@@ -80,7 +84,14 @@ export default function Register({}: Props) {
           <CardContent>
             <Formik
               initialValues={{ username: '', password: '' }}
-              onSubmit={async (values) => alert(JSON.stringify(values))}
+              onSubmit={async (values) => {
+                const response = await dispatch(signUp(values))
+                if (response.meta.requestStatus === 'rejected') {
+                  alert('Register failed')
+                } else {
+                  Router.push('/login')
+                }
+              }}
             >
               {(props) => showForm(props)}
             </Formik>
