@@ -27,9 +27,13 @@ yarn add formik formik-material-ui chart.js react-chartjs-2 react-moment moment 
 yarn add @reduxjs/toolkit react-redux axios cookie @react-hook/debounce @mui/x-data-grid react-iframe
 yarn add @types/cookie --dev
 
+# vscode extensions
 REST client
 SQLite viewer
 
 #
 yarn add @reduxjs/toolkit
 yarn add react-redux
+
+#
+yarn add axios
