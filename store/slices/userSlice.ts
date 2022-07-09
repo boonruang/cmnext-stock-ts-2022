@@ -2,6 +2,8 @@ import { createSlice, createAsyncThunk, PayloadAction } from '@reduxjs/toolkit'
 import { UserData } from '@/models/user.model'
 import { RootState } from '@/store/store'
 import * as serverService from '@/services/serverService'
+import httpClient from '@/utils/httpClient'
+import { AxiosRequestConfig } from 'axios'
 
 interface UserState {
   username: string
@@ -17,7 +19,7 @@ interface SingleProp {
 }
 
 const initialState: UserState = {
-  username: 'toy',
+  username: '',
   accessToken: '',
   isAuthenticated: false,
   isAuthenticating: true,
@@ -41,10 +43,19 @@ export const signUp = createAsyncThunk(
 export const signIn = createAsyncThunk(
   'user/signin',
   async (credential: SignAction) => {
-    const p1 = new Promise((res) =>
-      setTimeout(() => res({ result: 'signin success' }), 3000),
-    )
-    return await p1
+    const response = await serverService.signIn(credential)
+    if (response.result != 'ok') {
+      throw new Error('login failed')
+    }
+    // set accesss token
+    httpClient.interceptors.request.use((config?: AxiosRequestConfig) => {
+      if (config && config.headers) {
+        config.headers['Authorization'] = `Bearer ${response.token}`
+      }
+
+      return config
+    })
+    return response
   },
 )
 
@@ -63,7 +74,16 @@ const userSlice = createSlice({
       state.isAuthenticated = false
     }),
       builder.addCase(signIn.fulfilled, (state, action: any) => {
-        state.username = action.payload.result
+        state.accessToken = action.payload.token
+        state.isAuthenticated = true
+        state.isAuthenticating = false
+        state.user = action.payload.user
+      }),
+      builder.addCase(signIn.rejected, (state, action: any) => {
+        state.accessToken = ''
+        state.isAuthenticated = false
+        state.isAuthenticating = false
+        state.user = undefined
       })
   },
 })

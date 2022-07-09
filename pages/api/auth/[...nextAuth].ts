@@ -1,6 +1,12 @@
 // Next.js API route support: https://nextjs.org/docs/api-routes/introduction
+import {
+  HTTP_METHOD_POST,
+  HTTP_METHOD_GET,
+  ACCESS_TOKEN_KEY,
+} from '@/utils/constant'
+import { setCookie } from '@/utils/cookiesUtil'
+import httpClient from '@/utils/httpClient'
 import type { NextApiRequest, NextApiResponse } from 'next'
-import { HTTP_METHOD_GET, HTTP_METHOD_POST } from '@/utils/constant'
 
 export default function handler(req: NextApiRequest, res: NextApiResponse) {
   const action = req.query['nextAuth'][0]
@@ -13,12 +19,25 @@ export default function handler(req: NextApiRequest, res: NextApiResponse) {
   } else {
     return res
       .status(405)
-      .end(`Error: HTTP ${req.method} is not suppported for ${req.url}`)
+      .end(`Error: HTTP ${req.method} is not supported for ${req.url}`)
   }
 }
 
-function signin(req: NextApiRequest, res: NextApiResponse<any>) {
-  return res.end(`SignIn`)
+async function signin(req: NextApiRequest, res: NextApiResponse<any>) {
+  try {
+    const response = await httpClient.post(`/authen/login`, req.body)
+
+    const { token } = response.data
+    setCookie(res, ACCESS_TOKEN_KEY, token, {
+      httpOnly: true,
+      secure: process.env.NODE_ENV !== 'development',
+      sameSite: 'strict',
+      path: '/',
+    })
+    res.json(response.data)
+  } catch (error) {
+    res.status(400).end()
+  }
 }
 
 function signout(req: NextApiRequest, res: NextApiResponse<any>) {
@@ -26,5 +45,5 @@ function signout(req: NextApiRequest, res: NextApiResponse<any>) {
 }
 
 function getSession(req: NextApiRequest, res: NextApiResponse<any>) {
-  return res.end(`getSession`)
+  return res.end(`GetSession`)
 }
