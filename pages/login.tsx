@@ -19,6 +19,7 @@ interface Props {}
 
 export default function Login({}: Props) {
   const dispatch = useAppDispatch()
+  const router = useRouter()
 
   const showForm = ({
     values,
@@ -58,7 +59,7 @@ export default function Login({}: Props) {
           fullWidth
           size="small"
           color="primary"
-          onClick={() => Router.push('/register')}
+          onClick={() => router.push('/register')}
         >
           Register
         </Button>
@@ -90,7 +91,7 @@ export default function Login({}: Props) {
                 if (response.meta.requestStatus === 'rejected') {
                   alert('Login failed')
                 } else {
-                  Router.push('/stock')
+                  router.push('/stock')
                 }
               }}
             >
