@@ -17,7 +17,7 @@ import { signIn } from '@/store/slices/userSlice'
 
 interface Props {}
 
-export default function Login({}: Props) {
+const Login = ({}: Props) => {
   const dispatch = useAppDispatch()
   const router = useRouter()
 
@@ -115,3 +115,5 @@ export default function Login({}: Props) {
     </React.Fragment>
   )
 }
+
+export default Login

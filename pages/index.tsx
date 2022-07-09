@@ -6,7 +6,7 @@ import { useSelector } from 'react-redux'
 
 type Props = {}
 
-export default function Index({}: Props) {
+const Index = ({}: Props) => {
   const user = useSelector(userSelector)
   const dispatch = useAppDispatch()
   return (
@@ -26,3 +26,5 @@ export default function Index({}: Props) {
     </Layout>
   )
 }
+
+export default Index
