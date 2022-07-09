@@ -110,17 +110,17 @@ const userSlice = createSlice({
       builder.addCase(signOut.fulfilled, (state, action: any) => {
         state.accessToken = ''
         state.isAuthenticated = false
-        state.isAuthenticating = true
+        state.isAuthenticating = false
         state.user = undefined
       })
-      builder.addCase(getSession.fulfilled, (state,action) => {
-        state.isAuthenticating = false
-        if (action.payload && action.payload.user && action.payload.user.token) {
-          state.accessToken = action.payload.user.token;
-          state.user = action.payload.user;
-          state.isAuthenticated = true;
-        }
-      })
+    builder.addCase(getSession.fulfilled, (state, action) => {
+      state.isAuthenticating = false
+      if (action.payload && action.payload.user && action.payload.user.token) {
+        state.accessToken = action.payload.user.token
+        state.user = action.payload.user
+        state.isAuthenticated = true
+      }
+    })
   },
 })
 

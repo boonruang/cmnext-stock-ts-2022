@@ -14,6 +14,7 @@ import { TextField } from 'formik-material-ui'
 import { Box } from '@mui/material'
 import { useAppDispatch } from '@/store/store'
 import { signIn } from '@/store/slices/userSlice'
+import withAuth from '@/components/withAuth'
 
 interface Props {}
 
@@ -116,4 +117,4 @@ const Login = ({}: Props) => {
   )
 }
 
-export default Login
+export default withAuth(Login)

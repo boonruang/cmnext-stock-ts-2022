@@ -27,7 +27,12 @@ const withAuth = (WrappedComponent: React.FC) => (props: any) => {
       if (!isAuthenticated) {
         router.push(`/login`)
         return null
-      } else if (route !== 'stock') {
+      } else if (route !== '/stock') {
+        router.push(`/stock`)
+        return null
+      }
+    } else {
+      if (isAuthenticated) {
         router.push(`/stock`)
         return null
       }
@@ -36,6 +41,8 @@ const withAuth = (WrappedComponent: React.FC) => (props: any) => {
     // If user is logged in, return original component
     return <WrappedComponent {...props} />
   }
+
+  return null
 }
 
 export default withAuth
