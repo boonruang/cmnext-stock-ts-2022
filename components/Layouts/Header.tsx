@@ -9,6 +9,8 @@ import { Badge, Box, Menu, MenuItem } from '@mui/material'
 import { AccountCircle } from '@mui/icons-material'
 import MailIcon from '@mui/icons-material/Mail'
 import NotificationsIcon from '@mui/icons-material/Notifications'
+import { useAppDispatch } from '@/store/store'
+import { signOut } from '@/store/slices/userSlice'
 
 const drawerWidth = 240
 
@@ -41,6 +43,8 @@ type HeaderProp = {
 
 export default function Header({ open, onDrawerOpen }: HeaderProp) {
   const [showProfileMenu, setShowProfileMenu] = React.useState(false)
+
+  const dispatch = useAppDispatch()
 
   const handleClose = () => {
     setShowProfileMenu(false)
@@ -111,7 +115,7 @@ export default function Header({ open, onDrawerOpen }: HeaderProp) {
             open={showProfileMenu}
             onClose={handleClose}
           >
-            <MenuItem onClick={() => {}}>Logout</MenuItem>
+            <MenuItem onClick={() => dispatch(signOut())}>Logout</MenuItem>
             <MenuItem onClick={handleClose}>My account</MenuItem>
           </Menu>
         </Box>
