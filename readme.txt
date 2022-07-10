@@ -37,3 +37,9 @@ yarn add react-redux
 
 #
 yarn add axios
+
+# 
+build production
+.env.production
+yarn build
+yarn start

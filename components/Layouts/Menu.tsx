@@ -12,6 +12,9 @@ import ListItemIcon from '@mui/material/ListItemIcon'
 import ListItemText from '@mui/material/ListItemText'
 import InboxIcon from '@mui/icons-material/MoveToInbox'
 import MailIcon from '@mui/icons-material/Mail'
+import { blue } from '@mui/material/colors'
+import { Stack } from '@mui/material'
+import Image from 'next/image'
 
 const drawerWidth = 240
 
@@ -73,13 +76,22 @@ export default function Menu({ open, onDrawerClose }: MenuProp) {
   return (
     <Drawer variant="permanent" open={open}>
       <DrawerHeader>
-        <IconButton onClick={onDrawerClose}>
-          {theme.direction === 'rtl' ? (
-            <ChevronRightIcon />
-          ) : (
-            <ChevronLeftIcon />
-          )}
-        </IconButton>
+        <Stack direction="row" alignItems="center">
+          <Image
+            src="/static/img/cm_logo.png"
+            width={200}
+            height={40}
+            objectFit="contain"
+            alt="logo"
+          />
+          <IconButton onClick={onDrawerClose}>
+            {theme.direction === 'ltr' ? (
+              <ChevronLeftIcon />
+            ) : (
+              <ChevronLeftIcon />
+            )}
+          </IconButton>
+        </Stack>
       </DrawerHeader>
       <Divider />
       <List>

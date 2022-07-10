@@ -46,7 +46,7 @@ function signout(req: NextApiRequest, res: NextApiResponse<any>) {
   res.json({ result: 'ok' })
 }
 
-async function getSession(req: NextApiRequest, res: NextApiResponse<any>) {
+async function getSession(req: NextApiRequest, res: NextApiResponse) {
   try {
     const cookies = cookie.parse(req.headers.cookie || '')
     const accessToken = cookies[ACCESS_TOKEN_KEY]
