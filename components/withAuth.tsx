@@ -27,13 +27,13 @@ const withAuth = (WrappedComponent: React.FC) => (props: any) => {
       if (!isAuthenticated) {
         router.push(`/login`)
         return null
-      } else if (route !== '/stock') {
+      } else if (route == '/') {
         router.push(`/stock`)
         return null
       }
     } else {
       if (isAuthenticated) {
-        router.push(`/stock`)
+        router.push(`/stock`) // default page after login and open login or register page
         return null
       }
     }
