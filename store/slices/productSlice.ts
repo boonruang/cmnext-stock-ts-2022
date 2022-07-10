@@ -1,6 +1,6 @@
 import { createSlice, createAsyncThunk, PayloadAction } from '@reduxjs/toolkit'
 import { ProductData } from '@/models/product.model'
-import { RootState } from '@/store/store'
+import { RootState, store } from '@/store/store'
 import * as serverService from '@/services/serverService'
 import httpClient from '@/utils/httpClient'
 import { AxiosRequestConfig } from 'axios'
@@ -19,6 +19,14 @@ export const getProducts = createAsyncThunk(
   'product/get',
   async (keyword?: string) => {
     return await serverService.getProducts(keyword)
+  },
+)
+
+export const deleteProduct = createAsyncThunk(
+  'product/delete',
+  async (id: string) => {
+    await serverService.deleteProdcut(id)
+    store.dispatch(getProducts())
   },
 )
 
