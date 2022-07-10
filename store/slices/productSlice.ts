@@ -34,5 +34,9 @@ const productSlice = createSlice({
   },
 })
 
+// export common product selector
+export const productSelector = (store: RootState): ProductData[] | undefined =>
+  store.product.products
+
 // export reducer
 export default productSlice.reducer
