@@ -14,21 +14,33 @@ import { productImageURL } from '@/utils/commonUtil'
 import Image from 'next/image'
 import Zoom from 'react-medium-image-zoom'
 import 'react-medium-image-zoom/dist/styles.css'
-import { Typography } from '@mui/material'
+import { IconButton, Stack, Typography } from '@mui/material'
 import NumberFormat from 'react-number-format'
+import Moment from 'react-moment'
+import Router, { useRouter } from 'next/router'
+import EditIcon from '@mui/icons-material/Edit'
+import DeleteIcon from '@mui/icons-material/Delete'
+import { ProductData } from '@/models/product.model'
 
 type Props = {}
 
 const Stock = ({}: Props) => {
+  const router = useRouter()
+
   const dispatch = useAppDispatch()
   const productList = useSelector(productSelector)
+  const [openDialog, setOpenDialog] = React.useState<boolean>(false)
+  const [
+    selectedProduct,
+    setSelectedProduct,
+  ] = React.useState<ProductData | null>(null)
 
   React.useEffect(() => {
     dispatch(getProducts())
   }, [dispatch])
 
   const columns: GridColDef[] = [
-    { field: 'id', headerName: 'ID', width: 50 },
+    { headerName: 'ID', field: 'id', width: 50 },
     {
       headerName: 'IMG',
       field: 'image',
@@ -48,13 +60,13 @@ const Stock = ({}: Props) => {
     },
 
     {
-      field: 'name',
       headerName: 'Name',
+      field: 'name',
       width: 350,
     },
     {
-      field: 'stock',
       headerName: 'Stock',
+      field: 'stock',
       width: 150,
       renderCell: ({ value }: GridRenderCellParams<string>) => (
         <Typography variant="body1">
@@ -66,6 +78,59 @@ const Stock = ({}: Props) => {
             fixedDecimalScale={true}
           />
         </Typography>
+      ),
+    },
+    {
+      headerName: 'Price',
+      field: 'price',
+      width: 120,
+      renderCell: ({ value }: GridRenderCellParams<string>) => (
+        <Typography variant="body1">
+          <NumberFormat
+            value={value}
+            displayType={'text'}
+            thousandSeparator={true}
+            decimalScale={2}
+            fixedDecimalScale={true}
+            prefix={'฿'}
+          />
+        </Typography>
+      ),
+    },
+    {
+      headerName: 'TIME',
+      field: 'createdAt',
+      width: 220,
+      renderCell: ({ value }: GridRenderCellParams<string>) => (
+        <Typography variant="body1">
+          <Moment format="DD/MM/YYYY HH:mm">{value}</Moment>
+        </Typography>
+      ),
+    },
+    {
+      headerName: 'ACTION',
+      field: '.',
+      width: 120,
+      renderCell: ({ row }: GridRenderCellParams<string>) => (
+        <Stack direction="row">
+          <IconButton
+            aria-label="edit"
+            size="large"
+            onClick={() => router.push('/stock/edit?id=' + row.id)}
+          >
+            <EditIcon fontSize="inherit" />
+          </IconButton>
+          <IconButton
+            aria-label="delete"
+            size="large"
+            onClick={() => {
+              setSelectedProduct(row)
+              setOpenDialog(true)
+            }}
+          >
+            <DeleteIcon fontSize="inherit" />
+          </IconButton>
+        </Stack>
       ),
     },
   ]
