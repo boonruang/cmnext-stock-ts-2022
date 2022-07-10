@@ -1,6 +1,6 @@
 ### Get products
 GET http://localhost:8085/api/v2/stock/product HTTP/1.1
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6ImFkbWluIiwibGV2ZWwiOiJub3JtYWwiLCJpYXQiOjE2NTA2MTY2NTJ9.JvXvbJsq7iWfDFNtyw2bzeaL0VXtGEAV1IdGZfGsmKo
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6ImFkbWluIiwibGV2ZWwiOiJub3JtYWwiLCJpYXQiOjE2NTc0NjYzOTB9.Qfj_X6S44nB5zlupqAtJIpTgFYsmfLHqimHhAQhvAtg
 
 ### Get product by Id
 GET http://localhost:8085/api/v2/stock/product/7 HTTP/1.1

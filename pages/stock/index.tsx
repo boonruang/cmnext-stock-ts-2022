@@ -2,10 +2,18 @@ import React from 'react'
 import Layout from '@/components/Layouts/Layout'
 import withAuth from '@/components/withAuth'
 import { DataGrid, GridColDef, GridValueGetterParams } from '@mui/x-data-grid'
+import { getProducts } from '@/store/slices/productSlice'
+import { useAppDispatch } from '@/store/store'
 
 type Props = {}
 
 const Stock = ({}: Props) => {
+  const dispatch = useAppDispatch()
+
+  React.useEffect(() => {
+    dispatch(getProducts())
+  }, [dispatch])
+
   const columns: GridColDef[] = [
     { field: 'id', headerName: 'ID', width: 90 },
     {
