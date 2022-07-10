@@ -36,7 +36,7 @@ function MyApp({ Component, pageProps }: AppProps) {
     },
     spacing: 8,
     palette: {
-      primary: process.env.NEXT_PUBLIC_IS_PRODUCTION == '0' ? yellow : blue,
+      primary: process.env.NEXT_PUBLIC_IS_PRODUCTION == '0' ? blue : blue,
       background: {
         default: '#FFF',
       },
