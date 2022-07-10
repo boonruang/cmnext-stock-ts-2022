@@ -46,3 +46,6 @@ yarn start
 
 #
 quicktype.io
+
+# extra lib 2
+yarn add react-medium-image-zoom
