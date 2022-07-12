@@ -2,8 +2,7 @@ import Layout from '@/components/Layouts/Layout'
 import withAuth from '@/components/withAuth'
 import { ProductData } from '@/models/product.model'
 import { doGetStockById, editProduct } from '@/services/serverService'
-import { productSelector } from '@/store/slices/productSlice'
-import { useAppDispatch } from '@/store/store'
+
 import {
   Button,
   Card,
@@ -15,16 +14,18 @@ import { Field, Form, Formik, FormikProps } from 'formik'
 import { TextField } from 'formik-material-ui'
 import { GetServerSideProps, GetServerSidePropsContext } from 'next'
 import React from 'react'
-import { useSelector } from 'react-redux'
 import Image from 'next/image'
 import { productImageURL } from '@/utils/commonUtil'
 import Link from 'next/link'
+import { useRouter } from 'next/router'
 
 type Props = {
   product?: ProductData
 }
 
 const Edit = ({ product }: Props) => {
+  const router = useRouter()
+
   const showForm = ({
     values,
     setFieldValue,
@@ -155,7 +156,19 @@ const Edit = ({ product }: Props) => {
           return errors
         }}
         initialValues={product!}
-        onSubmit={(values, { setSubmitting }) => {}}
+        onSubmit={async (values, { setSubmitting }) => {
+          let data = new FormData()
+          data.append('id', String(values.id))
+          data.append('name', String(values.name))
+          data.append('price', String(values.price))
+          data.append('stock', String(values.stock))
+          if (values.file) {
+            data.append('image', values.file)
+          }
+          await editProduct(data)
+          router.push('/stock')
+          setSubmitting(false)
+        }}
       >
         {(props) => showForm(props)}
       </Formik>
