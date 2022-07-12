@@ -34,6 +34,7 @@ import {
   Fab,
   TextField,
   Typography,
+  Grid,
 } from '@mui/material'
 import NumberFormat from 'react-number-format'
 import Moment from 'react-moment'
@@ -42,10 +43,17 @@ import EditIcon from '@mui/icons-material/Edit'
 import DeleteIcon from '@mui/icons-material/Delete'
 import { ProductData } from '@/models/product.model'
 import { TransitionProps } from '@mui/material/transitions'
-import { Add, Clear, Search } from '@mui/icons-material'
+import {
+  Add,
+  AddShoppingCart,
+  AssignmentReturn,
+  Clear,
+  NewReleases,
+  Search,
+  Star,
+} from '@mui/icons-material'
 import Link from 'next/link'
-
-type Props = {}
+import StockCard from '@/components/StockCard'
 
 const Transition = React.forwardRef(function Transition(
   props: TransitionProps & {
@@ -78,6 +86,8 @@ const CustomToolbar: React.FunctionComponent<{
     </Link>
   </GridToolbarContainer>
 )
+
+type Props = {}
 
 const Stock = ({}: Props) => {
   const router = useRouter()
@@ -244,7 +254,44 @@ const Stock = ({}: Props) => {
 
   return (
     <Layout>
-      <div>index stock</div>
+      {/* Summary Icons */}
+      <Grid container style={{ marginBottom: 16 }} spacing={7}>
+        <Grid item lg={3} md={6} sm={12}>
+          <StockCard
+            icon={AddShoppingCart}
+            title="TOTAL"
+            subtitle="112 THB"
+            color="#00a65a"
+          />
+        </Grid>
+
+        <Grid item lg={3} md={6} sm={12}>
+          <StockCard
+            icon={NewReleases}
+            title="EMPTY"
+            subtitle="9 PCS."
+            color="#f39c12"
+          />
+        </Grid>
+
+        <Grid item lg={3} md={6} sm={12}>
+          <StockCard
+            icon={AssignmentReturn}
+            title="RETURN"
+            subtitle="1 PCS."
+            color="#dd4b39"
+          />
+        </Grid>
+
+        <Grid item lg={3} md={6} sm={12}>
+          <StockCard
+            icon={Star}
+            title="LOSS"
+            subtitle="5 PCS."
+            color="#00c0ef"
+          />
+        </Grid>
+      </Grid>
       <DataGrid
         sx={{ backgroundColor: 'white', height: '70vh' }}
         rows={productList ?? []}
