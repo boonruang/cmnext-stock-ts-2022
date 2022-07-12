@@ -159,6 +159,7 @@ const Stock = ({}: Props) => {
   const columns: GridColDef[] = [
     { headerName: 'ID', field: 'id', width: 50 },
     {
+      disableColumnMenu: true,
       headerName: 'IMG',
       field: 'image',
       width: 80,
