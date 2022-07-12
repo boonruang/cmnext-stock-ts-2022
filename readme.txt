@@ -52,3 +52,12 @@ quicktype.io
 yarn add react-medium-image-zoom
 yarn add faker
 yarn add react-chartjs-2
+
+# redux dev tool
+https://chrome.google.com/webstore/detail/redux-devtools/lmhkpmbekcpmknklioeibfkpmmfibljd?hl=th
+
+# next api
+https://nextjs.org/learn/basics/api-routes/creating-api-routes
+
+# chart option
+https://www.chartjs.org/docs/latest/general/options.html  
