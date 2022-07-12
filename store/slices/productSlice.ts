@@ -30,6 +30,11 @@ export const deleteProduct = createAsyncThunk(
   },
 )
 
+export const editProduct = createAsyncThunk(
+  'product/edit',
+  async (data?: FormData) => {},
+)
+
 const productSlice = createSlice({
   name: 'product',
   initialState: initialState,
