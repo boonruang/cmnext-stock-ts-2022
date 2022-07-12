@@ -5,7 +5,6 @@ import * as serverService from '@/services/serverService'
 import httpClient from '@/utils/httpClient'
 import { AxiosRequestConfig } from 'axios'
 import Router from 'next/router'
-import { config } from 'process'
 
 interface UserState {
   username: string

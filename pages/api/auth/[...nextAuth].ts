@@ -8,9 +8,13 @@ import { clearCookie, setCookie } from '@/utils/cookiesUtil'
 import httpClient from '@/utils/httpClient'
 import type { NextApiRequest, NextApiResponse } from 'next'
 import cookie from 'cookie'
+import React, { useRef } from 'react'
 
 export default function handler(req: NextApiRequest, res: NextApiResponse) {
-  const action = req.query['nextAuth'][0]
+  const action = req.query['nextAuth'] && req.query['nextAuth'][0]
+
+  // console.log("req.query['nextAuth'] =>", req.query['nextAuth'])
+
   if (req.method === HTTP_METHOD_POST && action === 'signin') {
     return signin(req, res)
   } else if (req.method === HTTP_METHOD_GET && action === 'signout') {

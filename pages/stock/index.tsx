@@ -75,6 +75,7 @@ const Stock = ({}: Props) => {
     return (
       <Dialog
         open={openDialog}
+        TransitionComponent={Transition}
         keepMounted
         aria-labelledby="alert-dialog-slide-title"
         aria-describedby="alert-dialog-slide-description"

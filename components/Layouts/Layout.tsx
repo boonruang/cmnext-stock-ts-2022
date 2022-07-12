@@ -18,7 +18,7 @@ interface LayoutProps {
   children: React.ReactNode
 }
 const Layout = ({ children }: LayoutProps) => {
-  const [open, setOpen] = React.useState(false)
+  const [open, setOpen] = React.useState(true)
 
   return (
     <Box sx={{ display: 'flex' }}>
