@@ -56,7 +56,6 @@ const Transition = React.forwardRef(function Transition(
 
 const Stock = ({}: Props) => {
   const router = useRouter()
-
   const dispatch = useAppDispatch()
   const productList = useSelector(productSelector)
   const [openDialog, setOpenDialog] = React.useState<boolean>(false)
@@ -65,9 +64,15 @@ const Stock = ({}: Props) => {
     setSelectedProduct,
   ] = React.useState<ProductData | null>(null)
 
+  const [keywordSearch, setKeywordSearch] = React.useState('')
+
   React.useEffect(() => {
     dispatch(getProducts())
   }, [dispatch])
+
+  React.useEffect(() => {
+    dispatch(getProducts(keywordSearch))
+  }, [dispatch, keywordSearch])
 
   const handleClose = () => {
     setOpenDialog(false)
@@ -288,6 +293,17 @@ const Stock = ({}: Props) => {
       <div>index stock</div>
       <DataGrid
         components={{ Toolbar: QuickSearchToolbar }}
+        componentsProps={{
+          toolbar: {
+            value: keywordSearch,
+            onChange: (e: React.ChangeEvent<HTMLInputElement>) => {
+              setKeywordSearch(e.target.value)
+            },
+            clearSeach: () => {
+              setKeywordSearch('')
+            },
+          },
+        }}
         sx={{ backgroundColor: 'white', height: '70vh' }}
         rows={productList ?? []}
         columns={columns}
