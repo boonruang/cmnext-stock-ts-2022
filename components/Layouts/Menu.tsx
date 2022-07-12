@@ -16,7 +16,7 @@ import Image from 'next/image'
 import { ListItem, Stack } from '@mui/material'
 import Link from 'next/link'
 import { Layers, BarChart, Person } from '@mui/icons-material'
-import router from 'next/router'
+import { useRouter } from 'next/router'
 
 const drawerWidth = 240
 
@@ -73,6 +73,7 @@ type MenuProp = {
 }
 
 export default function Menu({ open, onDrawerClose }: MenuProp) {
+  const router = useRouter()
   const theme = useTheme()
 
   return (

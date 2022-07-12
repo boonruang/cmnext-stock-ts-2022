@@ -50,3 +50,5 @@ quicktype.io
 
 # extra lib 2
 yarn add react-medium-image-zoom
+yarn add faker
+yarn add react-chartjs-2
